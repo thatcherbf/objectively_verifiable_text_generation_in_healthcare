@@ -2,9 +2,17 @@
     box-sizing: border-box;
 }
 
+h1,
+h2,
+h3 {
+    margin: 0 auto;
+}
+
 body {
-    width: 100%;
+    font-family: Arial, sans-serif;
     display: inline-flex;
+    height: 100%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -33,29 +41,286 @@ button {
     width: 15%;
 }
 
-#column {
-    width: 50%;
+.column {
     display: inline-flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: flex-start;
+    height: 100%;
+    padding: 1%;
+}
+
+#left-column {
+    width: 40%;
+}
+
+#inputs-col1 {
+    display: inline-flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 90%;
+}
+
+.input-items {
+    height: 6vh;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    background-color: white;
+    padding: 0.5%;
+}
+
+.age-box,
+.TC-box,
+.LDL-box,
+.HDL-box,
+.nHDL-box,
+.ApoB-box,
+.SBP-box,
+.height-box,
+.weight-box,
+.BMI-box,
+.wCirc-box,
+.hba1c-box {
+    height: 4vh;
+    width: 100%;
+    display: inline-flex;
+    justify-content: right;
+    flex: 1;
+}
+
+#age-input,
+#TC-input,
+#LDL-input,
+#HDL-input,
+#nHDL-input,
+#ApoB-input,
+#SBP-input,
+#height-input,
+#weight-input,
+#BMI-input,
+#wCirc-input,
+#hba1c-input {
+    background-color: #ccc;
+    border: solid black 1px;
+    border-radius: 5px 0 0 5px;
+    border-right: 0;
+    height: 4vh;
+    width: 100%;
+    padding-left: 2%;
+    flex: 2;
+}
+
+.sex-box,
+.trtbp-box,
+.diab-box,
+.smoke-box,
+.fmrtob-box,
+.famhx-box {
+    height: 4vh;
+    width: 100%;
+    display: inline-flex;
+    justify-content: right;
+    flex: 1;
+}
+
+.sex-box label,
+.trtbp-box label,
+.diab-box label,
+.smoke-box label,
+.fmrtob-box label,
+.famhx-box label {
+    float: left;
+    background-color: #ccc;
+    border: solid black 1px;
+    border-radius: 5px;
+    width: 50%;
+    overflow: hidden;
+}
+
+.label-box {
+    flex: 1.5;
+    display: inline-flex;
+}
+
+#sex-label,
+#age-label,
+#TC-label,
+#LDL-label,
+#HDL-label,
+#nHDL-label,
+#ApoB-label,
+#SBP-label,
+#height-label,
+#weight-label,
+#BMI-label,
+#wCirc-label,
+#hba1c-label,
+#diab-label,
+#smoke-label,
+#fmrtob-label,
+#famhx-label,
+#trtbp-label {
+    margin-left: 2.5%;
+    font-size: 90%;
+}
+
+.cholesterol-items,
+.outer-BMI-items {
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#cholesterol-items-label,
+#outer-BMI-items-label {
+    margin-top: 1%;
+    margin-left: 1.25%;
+}
+
+#sex-items,
+#age-items,
+#ApoB-items,
+#SBP-items,
+#trtbp-items,
+#diab-items,
+#smoke-items,
+#fmrtob-items,
+#famhx-items,
+#wCirc-items,
+#hba1c-items {
+    border: solid black 1px;
+    border-radius: 5px;
+    height: 5.5vh;
+}
+
+#TC-items,
+#LDL-items,
+#HDL-items,
+#nHDL-items,
+#height-items,
+#weight-items,
+#BMI-items {
+    height: 5vh;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#TC-label,
+#LDL-label,
+#HDL-label,
+#nHDL-label,
+#height-label,
+#weight-label,
+#BMI-label {
+    margin-left: 7.5%;
+}
+
+.dropdown-units {
+    width: 25%;
+}
+
+.unit-label {
+    font-size: 80%;
+    background-color: #ccc;
+    overflow: hidden;
+    border: solid black 1px;
+    border-radius: 0 5px 5px 0;
+    text-align: center;
+    padding: 1vh 0px;
+    display: block;
+    padding: 0;
+    line-height: 4vh;
+    overflow: hidden;
+    flex: 1;
+}
+
+.units-box {
+    height: 4vh;
+    width: 50%;
+    display: inline-flex;
+    justify-content: right;
+    flex: 1;
+}
+
+.units-box label {
+    float: left;
+    width: 50%;
+    font-size: 80%;
+    background-color: #ccc;
+    overflow: hidden;
+    border: solid black 1px;
+    border-radius: 5px;
+}
+
+.units-box label:first-of-type {
+    border-radius: 0;
+}
+
+.units-box label:last-of-type {
+    border-radius: 0 5px 5px 0;
+}
+
+.units-box label span {
+    text-align: center;
+    padding: 1vh 0px;
+    display: block;
+    padding: 0;
+    line-height: 4vh;
+    overflow: hidden;
+}
+
+.units-box label input {
+    position: absolute;
+    visibility: hidden;
+}
+
+.units-box input:checked+span {
+    background-color: #ccc;
+    color: white;
+    padding: 0;
+    height: 4vh;
+    line-height: 4vh;
+}
+
+.button-box {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+#right-column {
+    width: 60%;
 }
 
 #response {
+    background-color: white;
     white-space: pre-wrap;
+    height: 50%;
     width: 100%;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    border: solid #ccc 1px;
+    border-radius: 5px;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
     border: solid black 1px;
 }
 
+.response-body {
+    display: inline-block;
+    width: 86.5%;
+}
+
 .user-query {
     width: 100%;
     padding: 0.5% 1%;
-    border: solid black 1px;
     display: flex;
     flex-direction: row;
+    border: solid black 1px;
 }
 
 .model-response {
@@ -63,6 +328,7 @@ button {
     padding: 0.5% 1%;
     display: flex;
     flex-direction: row;
+    background-color: #ccc;
     border: solid black 1px;
 }
 
@@ -73,11 +339,6 @@ button {
     margin-right: 1%;
 }
 
-.response-body {
-    display: inline-block;
-    width: 86.5%;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -85,7 +346,8 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
-/* Firefox */
 input[type=number] {
+    appearance: textfield; 
+    -webkit-appearance: textfield; 
     -moz-appearance: textfield;
 }
