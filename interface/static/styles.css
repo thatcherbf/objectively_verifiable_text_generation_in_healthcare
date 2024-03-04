@@ -1,3 +1,10 @@
+:root {
+    --accentblue: #517896;
+    --accentbluedarker: #3f5e75;
+    --accentbluelight: #eef2f5;
+    --inputbackground: #f0f2f6;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -5,6 +12,7 @@
 h1,
 h2,
 h3 {
+    color: var(--accentblue);
     margin: 0 auto;
 }
 
@@ -14,6 +22,7 @@ body {
     height: 100%;
     width: 100%;
     margin: 0 auto;
+    background-color: var(--accentbluelight);
 }
 
 #query-box {
@@ -30,15 +39,22 @@ body {
 
 input[type="text"] {
     width: 85%;
+    padding: 7.5px;
+    border: 1px solid var(--accentblue);
+    border-radius: 5px 0px 0px 5px;
+}
+
+button:hover {
+    background-color: var(--accentbluedarker);
 }
 
 button {
     padding: 7.5px 10px;
+    color: #fff;
+    background-color: var(--accentblue);
+    border: solid var(--accentblue) 1px;
+    transition: background-color 0.3s;
     cursor: pointer;
-}
-
-#ask-button {
-    width: 15%;
 }
 
 .column {
@@ -102,8 +118,8 @@ button {
 #BMI-input,
 #wCirc-input,
 #hba1c-input {
-    background-color: #ccc;
-    border: solid black 1px;
+    background-color: var(--inputbackground);
+    border: solid var(--accentblue) 1px;
     border-radius: 5px 0 0 5px;
     border-right: 0;
     height: 4vh;
@@ -132,11 +148,66 @@ button {
 .fmrtob-box label,
 .famhx-box label {
     float: left;
-    background-color: #ccc;
-    border: solid black 1px;
+    background-color: var(--inputbackground);
+    border: solid var(--accentblue) 1px;
     border-radius: 5px;
     width: 50%;
     overflow: hidden;
+}
+
+.sex-box label:first-of-type,
+.trtbp-box label:first-of-type,
+.diab-box label:first-of-type,
+.smoke-box label:first-of-type,
+.fmrtob-box label:first-of-type,
+.famhx-box label:first-of-type {
+    border-radius: 5px 0 0 5px;
+}
+
+.sex-box label:last-of-type,
+.trtbp-box label:last-of-type,
+.diab-box label:last-of-type,
+.smoke-box label:last-of-type,
+.fmrtob-box label:last-of-type,
+.famhx-box label:last-of-type {
+    border-radius: 0 5px 5px 0;
+}
+
+.sex-box label span,
+.trtbp-box label span,
+.diab-box label span,
+.smoke-box label span,
+.fmrtob-box label span,
+.famhx-box label span {
+    display: block;
+    line-height: 4vh;
+    padding: 1vh 0px;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.sex-box label input,
+.trtbp-box label input,
+.diab-box label input,
+.smoke-box label input,
+.fmrtob-box label input,
+.famhx-box label input {
+    position: absolute;
+    visibility: hidden;
+}
+
+.sex-box input:checked+span,
+.trtbp-box input:checked+span,
+.diab-box input:checked+span,
+.smoke-box input:checked+span,
+.fmrtob-box input:checked+span,
+.famhx-box input:checked+span {
+    background-color: var(--accentblue);
+    color: white;
+    padding: 0;
+    height: 4vh;
+    line-height: 4vh;
 }
 
 .label-box {
@@ -169,7 +240,7 @@ button {
 .cholesterol-items,
 .outer-BMI-items {
     background-color: white;
-    border: solid black 1px;
+    border: solid var(--accentblue) 1px;
     border-radius: 5px;
     width: 100%;
 }
@@ -191,7 +262,7 @@ button {
 #famhx-items,
 #wCirc-items,
 #hba1c-items {
-    border: solid black 1px;
+    border: solid var(--accentblue) 1px;
     border-radius: 5px;
     height: 5.5vh;
 }
@@ -224,14 +295,13 @@ button {
 
 .unit-label {
     font-size: 80%;
-    background-color: #ccc;
-    overflow: hidden;
-    border: solid black 1px;
+    background-color: var(--inputbackground);
+    border: solid var(--accentblue) 1px;
     border-radius: 0 5px 5px 0;
-    text-align: center;
     padding: 1vh 0px;
-    display: block;
     padding: 0;
+    text-align: center;
+    display: block;
     line-height: 4vh;
     overflow: hidden;
     flex: 1;
@@ -307,7 +377,7 @@ button {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
-    border: solid black 1px;
+    border: solid #ccc 1px;
 }
 
 .response-body {
@@ -320,16 +390,14 @@ button {
     padding: 0.5% 1%;
     display: flex;
     flex-direction: row;
-    border: solid black 1px;
 }
 
 .model-response {
+    background-color: rgba(238,242,245,0.75);
     width: 100%;
     padding: 0.5% 1%;
     display: flex;
     flex-direction: row;
-    background-color: #ccc;
-    border: solid black 1px;
 }
 
 .author-name {
@@ -337,6 +405,18 @@ button {
     width: 12.5%;
     text-align: right;
     margin-right: 1%;
+}
+
+#ask-button {
+    width: 15%;
+    border-radius: 0px 5px 5px 0px;
+}
+
+#calculate-risk {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Chrome, Safari, Edge, Opera */
