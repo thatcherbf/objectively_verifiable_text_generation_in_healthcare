@@ -23,7 +23,7 @@ function submitQuery() {
     .then(data => {
         var modelResponseDiv = document.createElement("div"); // Create a new div element
         modelResponseDiv.className = "model-response"; // Set the class of the new div element
-        modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.text + "</div>"; // Set the inner HTML of the new div element    
+        modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.answer + "</div>"; // Set the inner HTML of the new div element    
 
         responseElement.appendChild(modelResponseDiv);    
         responseElement.scrollTop = responseElement.scrollHeight;
