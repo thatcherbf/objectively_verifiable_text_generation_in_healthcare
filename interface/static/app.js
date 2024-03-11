@@ -30,3 +30,16 @@ function submitQuery() {
     })
     .catch(error => console.error("Error:", error));
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Get the text input element
+  var inputElement = document.getElementById("query");
+
+  inputElement.addEventListener("keydown", function(event) {
+      // Check if the pressed key is Enter and the input field is not empty
+      if (event.key === "Enter" && inputElement.value.trim() !== "") {
+          // Call the function to submit the query
+          submitQuery();
+      }
+  });
+});
