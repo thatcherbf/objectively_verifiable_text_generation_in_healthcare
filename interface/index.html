@@ -1,7 +1,8 @@
 <html>
     <head>
         <link rel="stylesheet" href="static/styles.css">
-        <script type="text/javascript" src="static/app.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="static/app.js"></script>    
     </head>
 
     <body>
@@ -172,14 +173,35 @@
             </div>
         </div>
 
-        <div id="right-column">
-            <div id="response">
-            </div>
-            <div id="query-box">
-                <div id="query-box-button-pair">
-                    <input type="text" id="query" placeholder="Type your question here..." />
-                    <button id="ask-button" onclick="submitQuery()">Ask</button>
+        <div class="column" id="right-column">
+            <div id="right-column-top">
+                <div id="risk-graph">
                 </div>
+                <div id="risk-graph-right">
+                    <div id="risk-box">
+                        <div id="lifetime-risk-text">Your risk of having a heart attack up to age 80:</div>
+                        <div class="risk-value" id="lifetime-risk">0.00%</div>    
+                    </div>
+                    <div id="treatment-box">
+                        <div id="lifetime-risk-text-rx">Your risk of having a heart attack up to age 80</div>
+                        <strong id="lifetime-rx">Without treatment:</strong>
+                        <div class="risk-value" id="lifetime-risk-no-rx">0.00%</div>
+                        <strong id="lifetime-rx">With treatment:</strong>
+                        <div class="risk-value" id="lifetime-risk-with-rx">0.00%</div>    
+                    </div>
+                </div>
+            </div>
+
+            <div id="right-column-bottom">
+                <h2 id="assistant-header">Chat with the Assistant</h2>
+                <div id="response">
+                </div>
+                <div id="query-box">
+                    <div id="query-box-button-pair">
+                        <input type="text" id="query" placeholder="Type your question here..." />
+                        <button id="ask-button" onclick="submitQuery()">Ask</button>
+                    </div>
+                </div>    
             </div>
         </div>
     </body>
