@@ -6,7 +6,7 @@ let graph_green = "#0ed658";
 function submitQuery() {
     var responseElement = document.getElementById("response");
     var firstChild = responseElement.firstChild;
-    
+
     var query = document.getElementById("query").value;
     document.getElementById("query").value = "";
     
@@ -28,7 +28,11 @@ function submitQuery() {
     .then(data => {
         var modelResponseDiv = document.createElement("div"); // Create a new div element
         modelResponseDiv.className = "model-response"; // Set the class of the new div element
-        modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.answer + "</div>"; // Set the inner HTML of the new div element    
+        modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.text + "</div>"; // Set the inner HTML of the new div element    
+
+        if(data.line != null){
+          updateGraph_treatment(data.line[0], data.line.slice(1));
+        }
 
         responseElement.appendChild(modelResponseDiv);    
         responseElement.scrollTop = responseElement.scrollHeight;
