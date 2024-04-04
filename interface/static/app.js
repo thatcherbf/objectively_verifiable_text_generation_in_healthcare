@@ -190,16 +190,16 @@ function updateGraph_base(age, risk) {
     risk = risk.map(function(x) {
         return x * 100;
     });
-  
+    
     var ages = [];
     for (var i = 30; i <= 80; i++) {
         ages.push(i)
     }
-  
+    
     var regular_line = {
         x: ages,
         y: risk,
-        name: 'Your risk',
+        name: 'Your risk without intervention',
         mode: "lines",
         type: "scatter",
         hovertemplate: 'age: %{x}' + '<br>risk: %{y:.1f}%<br><extra></extra>',
@@ -207,35 +207,35 @@ function updateGraph_base(age, risk) {
             color: graph_red,
         }
     };
-  
+    
     var data = [regular_line];
     var total_list = risk;
-
+    
     // Display using Plotly
     var config = {
         displayModeBar: false,
     };
-  
+    
     var riskValue = (risk[risk.length - 1]).toFixed(1);
-
+    
     var lifetimeRiskValue = document.getElementById('lifetime-risk');
     var lifetimeRiskValueNoRx = document.getElementById('lifetime-risk-no-rx');
     lifetimeRiskValue.innerHTML = riskValue + "%"
     lifetimeRiskValueNoRx.innerHTML = riskValue + "%"
-
+    
     var riskBox = document.getElementById('risk-box');
     riskBox.style.display = "inline-block";
     var treatmentBox = document.getElementById('treatment-box');
     treatmentBox.style.display = "none";
-
-    var ticks = [age];
     
+    var ticks = [age];
+      
     for (let i = Math.ceil(age / 10) * 10; i <= 80; i++) {
         if (i % 10 == 0){
             ticks.push(i);
         }
     }
-  
+    
     var layout = {
         margin: {l: 60, r: 50, t: 50, b: 50},
         plot_bgcolor: 'rgba(0, 0, 0, 0)',
@@ -258,6 +258,7 @@ function updateGraph_base(age, risk) {
                 standoff: 10
             },
         },
+
         yaxis: {
             zeroline: true,
             showline: true,        
@@ -270,10 +271,12 @@ function updateGraph_base(age, risk) {
                 standoff: 12.5
             },
         },
+
         title: {
             text: "Your risk of having a heart attack or stroke",
             font: {color: graph_blue, size: 20}
         },
+
         legend: {
             x: 0,
             y: 1,
@@ -284,10 +287,77 @@ function updateGraph_base(age, risk) {
             },
         }
     };
-  
+    
     var riskGraph = document.getElementById('risk-graph');
     var riskGraphRight = document.getElementById('risk-graph-right');
     riskGraphRight.style.borderLeft = "1px solid #ccc";
     riskGraphRight.style.backgroundColor = "white";
     Plotly.newPlot(riskGraph, data, layout, config);
+}    
+    
+function updateGraph_treatment(age, risk_rx) {
+    var graphDiv = document.getElementById('risk-graph');
+    if(graphDiv.hasChildNodes()){
+        // Grab the existing data and layout
+        var existingData = JSON.parse(JSON.stringify(graphDiv.data));
+        var existingLayout = JSON.parse(JSON.stringify(graphDiv.layout));
+    
+        // Display using Plotly
+        var config = {
+            displayModeBar: false,
+        };
+    
+        risk_rx = risk_rx.map(function(x) {
+            return x * 100;
+        });
+    
+        var ages = [];
+        for (var i = 30; i <= 80; i++) {
+            ages.push(i)
+        }
+    
+        // Initialize an array to store the extracted y-values
+        var existingRisks = [];
+        existingData.forEach(function(trace) {
+            if (trace.y) {
+                existingRisks.push(trace.y);
+            }
+        });
+        existingRisks = existingRisks[0];
+    
+        var riskValue_rx = (risk_rx[risk_rx.length - 1]).toFixed(1);
+    
+        var lifetimeRiskValueWithRx = document.getElementById('lifetime-risk-with-rx');
+        lifetimeRiskValueWithRx.innerHTML = riskValue_rx + "%"
+    
+        var riskBox = document.getElementById('risk-box');
+        riskBox.style.display = "none";
+        var treatmentBox = document.getElementById('treatment-box');
+        treatmentBox.style.display = "inline-block";
+    
+        // Remove any existing treatment line
+        existingData = existingData.filter(function (trace) {
+            return trace.name !== 'Your risk with intervention';
+        });
+
+        var treatment_line = {
+            x: ages,
+            y: risk_rx,
+            name: 'Your risk with intervention',
+            mode: "lines",
+            type: "scatter",
+            hovertemplate: 'age: %{x}' + '<br>risk: %{y:.1f}%<br><extra></extra>',
+            line: {
+                color: graph_blue,
+            }
+        };
+    
+        existingData.push(treatment_line);
+    
+        var total_list = existingRisks + risk_rx;  
+        existingLayout.yaxis.range = [0, Math.max(total_list) + 0.5];
+        
+        var treatmentGraph = document.getElementById('risk-graph');
+        Plotly.newPlot(treatmentGraph, existingData, existingLayout, config);
+    }
 }
