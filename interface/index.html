@@ -1,30 +1,36 @@
 <html>
     <head>
+        <title>AI Medical Expert Chatbot</title>
         <link rel="stylesheet" href="static/styles.css">
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        <script type="text/javascript" src="static/app.js"></script>    
+        <script type="text/javascript" src="static/app.js"></script>
+        <link rel="icon" type="image/x-icon" href="static/favicon.ico">
     </head>
-
+    
     <body>
         <div class="column" id="left-column">
             <h2>Enter your information here</h2>
             <div id="inputs-col1">
                 <div class="input-items" id="sex-items">
                     <div class="label-box">
-                        <label for="sex-box" id="sex-label"> Sex </label><br>
+                        <label for="sex-box" id="sex-label"> Sex </label>
+                        <br>
                     </div>
                     <div class="sex-box">
                         <label>
-                            <input type="radio" name="sex-value" checked="checked" value=1><span>Male</span>
+                            <input type="radio" name="sex-value" checked="checked" value=1>
+                            <span>Male</span>
                         </label>
                         <label>
-                            <input type="radio" name="sex-value" value=0><span>Female</span>
+                            <input type="radio" name="sex-value" value=0>
+                            <span>Female</span>
                         </label>
                     </div>
                 </div>
                 <div class="input-items" id="age-items">
                     <div class="label-box">
-                        <label for="age-input" id="age-label"> Age </label><br>
+                        <label for="age-input" id="age-label"> Age </label>
+                        <br>
                     </div>
                     <!-- (ages 30-75) -->
                     <div class="age-box">
@@ -33,53 +39,52 @@
                         <br>
                     </div>
                 </div>
-
-                <div class = "outer-BMI-items">
+                <div class="outer-BMI-items">
                     <p id='outer-BMI-items-label'>BMI</p>
-                    
-                    <div class="input-items" id = "height-items">
-                    <div class = "label-box">
-                        <label for="height-input" id="height-label"> Height </label><br>
+                    <div class="input-items" id="height-items">
+                        <div class="label-box">
+                            <label for="height-input" id="height-label"> Height </label>
+                            <br>
+                        </div>
+                        <!-- (cm) -->
+                        <div class="height-box">
+                            <input type="number" id="height-input" name="height-input">
+                            <div class="unit-label">cm</div>
+                            <br>
+                        </div>
                     </div>
-                    <!-- (cm) -->
-                    <div class="height-box">
-                        <input type="number" id="height-input" name="height-input">
-                        <div class="unit-label">cm</div>
-                        <br>
+                    <div class="input-items" id="weight-items">
+                        <div class="label-box">
+                            <label for="weight-input" id="weight-label"> Weight </label>
+                            <br>
+                        </div>
+                        <!-- (kg) -->
+                        <div class="weight-box">
+                            <input type="number" id="weight-input" name="weight-input">
+                            <div class="unit-label">kg</div>
+                            <br>
+                        </div>
                     </div>
+                    <div class="input-items" id="BMI-items">
+                        <!-- <label for="BMI-input" id="BMI-label"> BMI: </label><br> -->
+                        <div class="label-box">
+                            <label for="BMI-input" id="BMI-label"> Your BMI is calculated as: </label>
+                            <br>
+                        </div>
+                        <div class="BMI-box">
+                            <input type="number" id="BMI-input" name="BMI-input" readonly="readonly">
+                            <div class="unit-label">kg/m²</div>
+                            <br>
+                        </div>
                     </div>
-        
-                    <div class="input-items" id = "weight-items">
-                    <div class = "label-box">
-                        <label for="weight-input" id="weight-label"> Weight </label><br>
-                    </div>
-                    <!-- (kg) -->
-                    <div class="weight-box">
-                        <input type="number" id="weight-input" name="weight-input">
-                        <div class="unit-label">kg</div>
-                        <br>
-                    </div>
-                    </div>
-        
-                    <div class="input-items" id = "BMI-items">
-                    <!-- <label for="BMI-input" id="BMI-label"> BMI: </label><br> -->
-                    <div class = "label-box">
-                        <label for="BMI-input" id="BMI-label"> Your BMI is calculated as: </label><br>
-                    </div>
-                    <div class="BMI-box">
-                        <input type="number" id="BMI-input" name="BMI-input" readonly="readonly">
-                        <div class="unit-label">kg/m²</div><br>
-                    </div>
-                    </div>  
-        
                     <!-- BMI value edit script -->
-                </div>    
-
+                </div>
                 <div class="cholesterol-items">
                     <p id="cholesterol-items-label">Cholesterol</p>
                     <div class="input-items" id="LDL-items">
                         <div class="label-box">
-                            <label for="LDL-input" id="LDL-label"> LDL Cholesterol </label><br>
+                            <label for="LDL-input" id="LDL-label"> LDL Cholesterol </label>
+                            <br>
                         </div>
                         <!-- (mmol/L) (range 2.0 - 5.0) -->
                         <div class="LDL-box">
@@ -90,7 +95,8 @@
                     </div>
                     <div class="input-items" id="HDL-items">
                         <div class="label-box">
-                            <label for="HDL-input" id="HDL-label"> HDL Cholesterol </label><br>
+                            <label for="HDL-input" id="HDL-label"> HDL Cholesterol </label>
+                            <br>
                         </div>
                         <!-- (mmol/L) (range 0.6 - 2.8) -->
                         <div class="HDL-box">
@@ -102,7 +108,8 @@
                 </div>
                 <div class="input-items" id="SBP-items">
                     <div class="label-box">
-                        <label for="SBP-input" id="SBP-label"> Systolic Blood Pressure </label><br>
+                        <label for="SBP-input" id="SBP-label"> Systolic Blood Pressure </label>
+                        <br>
                     </div>
                     <!-- (mmHg) (range 90 - 200) -->
                     <div class="SBP-box">
@@ -111,101 +118,110 @@
                         <br>
                     </div>
                 </div>
-                
                 <div class="input-items" id="diab-items">
                     <div class="label-box">
-                        <label for="diab-box" id="diab-label"> Do you have diabetes? </label><br>
+                        <label for="diab-box" id="diab-label"> Do you have diabetes? </label>
+                        <br>
                     </div>
                     <div class="diab-box">
                         <label>
-                            <input type="radio" name="diab-value" checked="checked" value=0><span>No</span>
+                            <input type="radio" name="diab-value" checked="checked" value=0>
+                            <span>No</span>
                         </label>
                         <label>
-                            <input type="radio" name="diab-value" value=1><span>Yes</span>
+                            <input type="radio" name="diab-value" value=1>
+                            <span>Yes</span>
                         </label>
                     </div>
                 </div>
                 <div class="input-items" id="smoke-items">
                     <div class="label-box">
-                        <label for="smoke-box" id="smoke-label"> Do you currently smoke? </label><br>
+                        <label for="smoke-box" id="smoke-label"> Do you currently smoke? </label>
+                        <br>
                     </div>
                     <div class="smoke-box">
                         <label>
-                            <input type="radio" name="smoke-value" checked="checked" value=0><span>No</span>
+                            <input type="radio" name="smoke-value" checked="checked" value=0>
+                            <span>No</span>
                         </label>
                         <label>
-                            <input type="radio" name="smoke-value" value=1><span>Yes</span>
+                            <input type="radio" name="smoke-value" value=1>
+                            <span>Yes</span>
                         </label>
                     </div>
                 </div>
                 <div class="input-items" id="fmrtob-items">
                     <div class="label-box">
-                        <label for="fmrtob-box" id="fmrtob-label"> Have you ever smoked? </label><br>
+                        <label for="fmrtob-box" id="fmrtob-label"> Have you ever smoked? </label>
+                        <br>
                     </div>
                     <div class="fmrtob-box">
                         <label>
-                            <input type="radio" name="fmrtob-value" checked="checked" value=0><span>No</span>
+                            <input type="radio" name="fmrtob-value" checked="checked" value=0>
+                            <span>No</span>
                         </label>
                         <label>
-                            <input type="radio" name="fmrtob-value" value=1><span>Yes</span>
+                            <input type="radio" name="fmrtob-value" value=1>
+                            <span>Yes</span>
                         </label>
                     </div>
                 </div>
                 <div class="input-items" id="famhx-items">
                     <div class="label-box">
-                        <label for="famhx-box" id="famhx-label"> Has anyone in your family had a heart attack or stroke?
-                        </label><br>
+                        <label for="famhx-box" id="famhx-label"> Has anyone in your family had a heart attack or stroke? </label>
+                        <br>
                     </div>
                     <div class="famhx-box">
                         <label>
-                            <input type="radio" name="famhx-value" checked="checked" value=0><span>No</span>
+                            <input type="radio" name="famhx-value" checked="checked" value=0>
+                            <span>No</span>
                         </label>
                         <label>
-                            <input type="radio" name="famhx-value" value=1><span>Yes</span>
+                            <input type="radio" name="famhx-value" value=1>
+                            <span>Yes</span>
                         </label>
                     </div>
                 </div>
-
             </div>
             <div class="button-box">
-                <!-- <button id="reset-fields"> Reset - Enter new information </button> -->
                 <button id="calculate-risk" onclick="calculateRisk()" disabled> Calculate Risk </button>
             </div>
         </div>
 
         <div class="column" id="right-column">
-            <div id="overlay"><h3>To begin interacting with the chatbot, please fill all fields in the form to the left.</h3></div>
+            <div id="overlay">
+                <h3>To begin interacting with the chatbot, please fill all fields in the form to the left.</h3>
+            </div>
             <div id="right-column-top">
                 <div id="risk-graph">
                     <div class="alert-box" id="alert-box">
                         <p class="alert">Please make sure to fill in all of the fields on the left</p>
-                    </div>            
+                    </div>
                 </div>
                 <div id="risk-graph-right">
                     <div id="risk-box">
                         <div id="lifetime-risk-text">Your risk of having a heart attack up to age 80:</div>
-                        <div class="risk-value" id="lifetime-risk">0.00%</div>    
+                        <div class="risk-value" id="lifetime-risk">0.00%</div>
                     </div>
                     <div id="treatment-box">
                         <div id="lifetime-risk-text-rx">Your risk of having a heart attack up to age 80</div>
                         <strong id="lifetime-rx">Without treatment:</strong>
                         <div class="risk-value" id="lifetime-risk-no-rx">0.00%</div>
                         <strong id="lifetime-rx">With treatment:</strong>
-                        <div class="risk-value" id="lifetime-risk-with-rx">0.00%</div>    
+                        <div class="risk-value" id="lifetime-risk-with-rx">0.00%</div>
                     </div>
                 </div>
             </div>
 
             <div id="right-column-bottom">
                 <h2 id="assistant-header">Chat with the Assistant</h2>
-                <div id="response">
-                </div>
+                <div id="response"></div>
                 <div id="query-box">
                     <div id="query-box-button-pair">
                         <input type="text" id="query" placeholder="Type your question here..." />
                         <button id="ask-button" onclick="submitQuery()">Ask</button>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </body>

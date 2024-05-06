@@ -9,7 +9,7 @@ function submitQuery() {
 
     var query = document.getElementById("query").value;
     document.getElementById("query").value = "";
-    
+
     var userQueryDiv = document.createElement("div"); // Create a new div element
     userQueryDiv.className = "user-query"; // Set the class of the new div element
     userQueryDiv.innerHTML = "<b class='author-name'>User: </b><div class='response-body'>" + query + "</div>"; // Set the inner HTML of the new div element
@@ -18,26 +18,28 @@ function submitQuery() {
     responseElement.scrollTop = responseElement.scrollHeight;
 
     fetch("/interact", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({query: query})
-    })
-    .then(response => response.json())
-    .then(data => {
-        var modelResponseDiv = document.createElement("div"); // Create a new div element
-        modelResponseDiv.className = "model-response"; // Set the class of the new div element
-        modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.text + "</div>"; // Set the inner HTML of the new div element    
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                query: query
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            var modelResponseDiv = document.createElement("div"); // Create a new div element
+            modelResponseDiv.className = "model-response"; // Set the class of the new div element
+            modelResponseDiv.innerHTML = "<b class='author-name'>AI Expert: </b><div class='response-body'>" + data.text + "</div>"; // Set the inner HTML of the new div element    
 
-        if(data.line != null){
-          updateGraph_treatment(data.line[0], data.line.slice(1));
-        }
+            if (data.line != null) {
+                updateGraph_treatment(data.line[0], data.line.slice(1));
+            }
 
-        responseElement.appendChild(modelResponseDiv);    
-        responseElement.scrollTop = responseElement.scrollHeight;
-    })
-    .catch(error => console.error("Error:", error));
+            responseElement.appendChild(modelResponseDiv);
+            responseElement.scrollTop = responseElement.scrollHeight;
+        })
+        .catch(error => console.error("Error:", error));
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -64,24 +66,24 @@ function calculateRisk(ldl_rx = '0', ldl_dec = '0', sbp_rx = '0', sbp_dec = '0')
     inputsState['bmi'] = document.getElementById("BMI-input").value;
 
     fetch("/calculate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputsState)
-    })
-    .then(response => response.json())
-    .then(data => {
-        updateGraph_base(data['age'], data['data']);
-    })
-    .catch(error => console.error("Error:", error));
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(inputsState)
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateGraph_base(data['age'], data['data']);
+        })
+        .catch(error => console.error("Error:", error));
 }
 
 function getCurrentInputsState() {
     const inputItems = document.querySelectorAll(".sex-box input, #age-input, #TC-input, #LDL-input, #HDL-input, #SBP-input, #height-input, #weight-input, .diab-box input, .smoke-box input, .fmrtob-box input, .famhx-box input");
 
     const formData = {};
-    
+
     inputItems.forEach(input => {
         if (input.type === 'radio') {
             // Handle radio buttons
@@ -95,12 +97,12 @@ function getCurrentInputsState() {
             const cleanKey = key.replace(/(-value|-input)$/, ''); // Remove '-value' or '-input' suffix
             formData[cleanKey] = input.value;
         }
-    }); 
+    });
 
     return formData;
-};    
+};
 
-window.onload = function(){
+window.onload = function() {
     // ---------- BMI change script ---------- //
     const BMI_input = document.getElementById("BMI-input");
     const height_input = document.getElementById("height-input");
@@ -124,35 +126,35 @@ window.onload = function(){
         } else {
             BMI_input.value = "";
         }
-    }    
+    }
     // ---------- BMI change script ---------- //
 
     function refreshGraph(id) {
         var graphDiv = document.getElementById(id + '-graph');
-        if(graphDiv.hasChildNodes()){
-        // Grab the existing data and layout
-        var existingData = graphDiv.data;
-        var existingLayout = graphDiv.layout;
+        if (graphDiv.hasChildNodes()) {
+            // Grab the existing data and layout
+            var existingData = graphDiv.data;
+            var existingLayout = graphDiv.layout;
 
-        // Display using Plotly
-        var config = {
-            displayModeBar: false,
-        };
+            // Display using Plotly
+            var config = {
+                displayModeBar: false,
+            };
 
-        Plotly.newPlot(graphDiv, existingData, existingLayout, config);
+            Plotly.newPlot(graphDiv, existingData, existingLayout, config);
         }
-    };    
+    };
 
     // ------ greyed out button ------ //
     const input_items = document.querySelectorAll(".sex-box input, #age-input, #TC-input, #LDL-input, #HDL-input, #SBP-input, #height-input, #weight-input, .diab-box input, .smoke-box input, .fmrtob-box input, .famhx-box input");
 
     for (const input of input_items) {
-        input.addEventListener('input', function () {
-        const submitButton = document.getElementById('calculate-risk');
-        const allFieldsFilled = areAllFieldsFilled();
-        submitButton.disabled = !allFieldsFilled; // Disable button if inputs are not filled
+        input.addEventListener('input', function() {
+            const submitButton = document.getElementById('calculate-risk');
+            const allFieldsFilled = areAllFieldsFilled();
+            submitButton.disabled = !allFieldsFilled; // Disable button if inputs are not filled
         });
-    }  
+    }
 
     function areAllFieldsFilled() {
         const inputElements = document.querySelectorAll(".sex-box input, #age-input, #TC-input, #LDL-input, #HDL-input, #SBP-input, #height-input, #weight-input, .diab-box input, .smoke-box input, .fmrtob-box input, .famhx-box input");
@@ -230,19 +232,24 @@ function updateGraph_base(age, risk) {
     treatmentBox.style.display = "none";
 
     var ticks = [age];
-    
+
     for (let i = Math.ceil(age / 10) * 10; i <= 80; i++) {
-        if (i % 10 == 0){
+        if (i % 10 == 0) {
             ticks.push(i);
         }
     }
 
     var layout = {
-        margin: {l: 60, r: 50, t: 50, b: 50},
+        margin: {
+            l: 60,
+            r: 50,
+            t: 50,
+            b: 50
+        },
         plot_bgcolor: 'rgba(0, 0, 0, 0)',
         hovermode: "closest",
         xaxis: {
-            tickvals: ticks, 
+            tickvals: ticks,
             zeroline: true,
             showspikes: true,
             spikecolor: 'rgb(150, 150, 150)',
@@ -252,33 +259,42 @@ function updateGraph_base(age, risk) {
             spikethickness: 1,
             range: [age, 80],
             fixedrange: true,
-            automargin: true, 
+            automargin: true,
             title: {
                 text: 'Age (years)',
-                font: {color: graph_blue, size: 16},
+                font: {
+                    color: graph_blue,
+                    size: 16
+                },
                 standoff: 10
             },
         },
         yaxis: {
             zeroline: true,
-            showline: true,        
+            showline: true,
             range: [0, Math.max(total_list) + 0.5],
             fixedrange: true,
-            automargin: true, 
+            automargin: true,
             title: {
                 text: 'Risk (%)',
-                font: {color: graph_blue, size: 16},
+                font: {
+                    color: graph_blue,
+                    size: 16
+                },
                 standoff: 12.5
             },
         },
         title: {
             text: "Your risk of having a heart attack or stroke",
-            font: {color: graph_blue, size: 20}
+            font: {
+                color: graph_blue,
+                size: 20
+            }
         },
         legend: {
             x: 0,
             y: 1,
-            traceorder:'reversed',
+            traceorder: 'reversed',
             font: {
                 size: 16,
                 color: graph_blue,
@@ -291,11 +307,11 @@ function updateGraph_base(age, risk) {
     riskGraphRight.style.borderLeft = "1px solid #ccc";
     riskGraphRight.style.backgroundColor = "white";
     Plotly.newPlot(riskGraph, data, layout, config);
-}    
+}
 
 function updateGraph_treatment(age, risk_rx) {
     var graphDiv = document.getElementById('risk-graph');
-    if(graphDiv.hasChildNodes()){
+    if (graphDiv.hasChildNodes()) {
         // Grab the existing data and layout
         var existingData = JSON.parse(JSON.stringify(graphDiv.data));
         var existingLayout = JSON.parse(JSON.stringify(graphDiv.layout));
@@ -334,7 +350,7 @@ function updateGraph_treatment(age, risk_rx) {
         treatmentBox.style.display = "inline-block";
 
         // Remove any existing treatment line
-        existingData = existingData.filter(function (trace) {
+        existingData = existingData.filter(function(trace) {
             return trace.name !== 'Your risk with intervention';
         });
 
@@ -352,7 +368,7 @@ function updateGraph_treatment(age, risk_rx) {
 
         existingData.push(treatment_line);
 
-        var total_list = existingRisks + risk_rx;  
+        var total_list = existingRisks + risk_rx;
         existingLayout.yaxis.range = [0, Math.max(total_list) + 0.5];
 
         var treatmentGraph = document.getElementById('risk-graph');
