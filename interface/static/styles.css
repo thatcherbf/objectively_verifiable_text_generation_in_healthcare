@@ -319,9 +319,9 @@ button {
     float: left;
     width: 50%;
     font-size: 80%;
-    background-color: #ccc;
+    background-color: var(--inputbackground);
     overflow: hidden;
-    border: solid black 1px;
+    border: solid var(--accentblue) 1px;
     border-radius: 5px;
 }
 
@@ -348,7 +348,7 @@ button {
 }
 
 .units-box input:checked+span {
-    background-color: #ccc;
+    background-color: var(--accentblue);
     color: white;
     padding: 0;
     height: 4vh;
@@ -367,11 +367,11 @@ button {
 
 #overlay {
     background-color: rgba(238,242,245,0.5);
+    height: 100%;
+    width: 60%;
     position: absolute;
     top: 0;
     right: 0;
-    height: 100%;
-    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -523,15 +523,14 @@ button {
 #response {
     background-color: white;
     white-space: pre-wrap;
-    height: 50%;
+    height: 80%;
     width: 100%;
-    overflow-y: auto; 
     overflow-x: hidden;
-    border: solid #ccc 1px;
-    border-radius: 5px;
+    overflow-y: auto; 
     display: inline-flex;
     flex-direction: column;
     align-items: flex-end;
+    border-radius: 5px;
     border: solid #ccc 1px;
 }
 
@@ -571,6 +570,11 @@ button {
     width: 100%;
     text-align: center;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+#reset-button {
+    width: 17.5%;
     border-radius: 5px;
 }
 

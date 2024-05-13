@@ -375,3 +375,19 @@ function updateGraph_treatment(age, risk_rx) {
         Plotly.newPlot(treatmentGraph, existingData, existingLayout, config);
     }
 }
+
+function resetContext() {
+    var responseElement = document.getElementById("response");
+
+    fetch("/reset", {
+            method: "POST"
+        })
+        .then(() => {
+            var resetContextDiv = document.createElement("div"); // Create a new div element
+            resetContextDiv.className = "user-query"; // Set the class of the new div element
+            resetContextDiv.innerHTML = "<em>Context has been reset.</em>"; // Set the inner HTML of the new div element  
+
+            responseElement.appendChild(resetContextDiv);
+        })
+        .catch(error => console.error("Error:", error));
+}
