@@ -44,6 +44,12 @@ input[type="text"] {
     border-radius: 5px 0px 0px 5px;
 }
 
+input[type=number] {
+    appearance: textfield; 
+    -webkit-appearance: textfield; 
+    -moz-appearance: textfield;
+}
+
 button:hover {
     background-color: var(--accentbluedarker);
 }
@@ -583,10 +589,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-input[type=number] {
-    appearance: textfield; 
-    -webkit-appearance: textfield; 
-    -moz-appearance: textfield;
 }
